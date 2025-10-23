@@ -23,4 +23,5 @@ public class Product {
     private String productDescription;
     private Long price;
     private Long quantity;
+    private String image;
 }
