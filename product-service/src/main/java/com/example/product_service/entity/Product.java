@@ -21,7 +21,6 @@ public class Product {
     private Long productId;
     private String productName;
     private String productDescription;
-    private Long price;
+    private String price;
     private Long quantity;
-    private String image;
 }

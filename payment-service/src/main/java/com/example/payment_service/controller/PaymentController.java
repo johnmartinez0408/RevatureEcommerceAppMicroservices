@@ -20,7 +20,7 @@ public class PaymentController {
         return paymentService.getAllPayments();
     }
 
-    @GetMapping(path = "/{id}")
+    @GetMapping(path = "/{paymentId}")
     public Payment getPaymentById(@PathVariable Long paymentId){
         return paymentService.getPaymentById(paymentId);
     }

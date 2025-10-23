@@ -1,34 +1,85 @@
 package com.example.product_service.service.impl;
 
 import com.example.product_service.entity.Product;
+import com.example.product_service.model.ProductRequest;
+import com.example.product_service.model.ProductResponse;
 import com.example.product_service.repository.ProductRepository;
 import com.example.product_service.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
+import static org.springframework.beans.BeanUtils.copyProperties;
+
+import java.util.ArrayList;
 import java.util.List;
 
+@Service
 public class ProductServiceImpl implements ProductService {
 
     @Autowired
     private ProductRepository productRepository;
 
     @Override
-    public List<Product> getAllProducts() {
-        return productRepository.findAll();
+    public List<ProductResponse> getAllProducts() {
+
+        List<Product> products = productRepository.findAll();
+        List<ProductResponse> productResponses = new ArrayList<>();
+
+        products.forEach(
+            product -> {
+                ProductResponse currentProductResponse = new ProductResponse();
+                copyProperties(product, currentProductResponse);
+                productResponses.add(currentProductResponse);
+            }
+        );
+
+        return productResponses;
     }
 
     @Override
-    public Product getProductById(Long productId) {
-        return productRepository.findById(productId).get();
+    public ProductResponse getProductById(Long productId) {
+//        Product product= productRepository.findById(productId)
+//                .orElseThrow(() -> new RuntimeException("Product not found"));
+        Product product = productRepository.findById(productId).get();
+        ProductResponse productResponse = new ProductResponse();
+        copyProperties(product, productResponse);
+
+        return productResponse;
     }
 
     @Override
-    public Product saveProduct(Product product){
-        return productRepository.save(product);
+    public ProductResponse saveProduct(ProductRequest productRequest){
+//        return productRepository.save(product);
+        return null;
     }
 
     @Override
-    public List<Product> getProductsByCategory(Long categoryId) {
+    public List<ProductResponse> getProductsByCategory(Long categoryId) {
         return List.of();
     }
+
+    @Override
+    public ProductResponse addProduct(ProductRequest productRequest) {
+        Product product = new Product();
+        product.setProductName(productRequest.getProductName());
+        product.setQuantity(productRequest.getQuantity());
+
+        copyProperties(productRequest, product);
+        productRepository.save(product);
+
+        ProductResponse productResponse = new ProductResponse();
+        copyProperties(product, productResponse);
+
+
+        return productResponse;
+    }
+
+    @Override
+    public void reduceQuantity(Long productId, Long quantity) {
+
+    }
+
+
+
+
 }
