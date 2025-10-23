@@ -1,5 +1,6 @@
 package com.example.order_service.entity;
 
+import com.example.order_service.model.PaymentMethod;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -27,4 +28,5 @@ public class Order {
     private Instant orderDate;
     private String orderStatus;
     private Long amount;
+    private PaymentMethod paymentMethod;
 }
