@@ -1,3 +1,5 @@
 spring:
   application:
-    name: category-service
+    name: CATEGORY-SERVICE
+  config:
+    import: "optional:configserver:http://localhost:9000"
