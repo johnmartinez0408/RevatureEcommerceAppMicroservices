@@ -2,9 +2,11 @@ package com.example.order_service.service.impl;
 
 import com.example.order_service.entity.Order;
 import com.example.order_service.exception.OrderServiceException;
+import com.example.order_service.external.client.ProductService;
 import com.example.order_service.model.OrderRequest;
 import com.example.order_service.repository.OrderRepository;
 import com.example.order_service.service.OrderService;
+import com.netflix.discovery.converters.Auto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -18,6 +20,9 @@ public class OrderServiceImpl implements OrderService {
 
     @Autowired
     private OrderRepository orderRepository;
+
+    @Autowired
+    private ProductService productService;
 
     @Override
     public List<Order> getAllOrders() {
@@ -39,18 +44,20 @@ public class OrderServiceImpl implements OrderService {
     @Override
     public Long placeOrder(OrderRequest orderRequest) {
 
-        //1 Save the order details to db and status as CREATED
+        //1 Reduce quantity by calling productService
+        productService.reduceQuantity(orderRequest.getProductId(), orderRequest.getQuantity());
 
+        //2 Save the order details to db and status as CREATED
         Order order = new Order();
         order.setAmount(orderRequest.getAmount());
         order.setProductId(orderRequest.getProductId());
         order.setQuantity(orderRequest.getQuantity());
         order.setOrderDate(Instant.now());
         order.setOrderStatus("CREATED");
-        order.setPaymentMethod(orderRequest.getPaymentMethod());
+//        order.setPaymentMethod(orderRequest.getPaymentMethod());
 
         order = orderRepository.save(order);
-        //2 Call product service to reduce inventory
+
 
         //3 call payment service to make payment. if success update status to PLACED
 
