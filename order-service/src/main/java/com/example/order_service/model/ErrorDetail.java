@@ -10,4 +10,5 @@ import lombok.NoArgsConstructor;
 public class ErrorDetail {
     private String errorMessage;
     private String errorCode;
+    private int statusCode;
 }

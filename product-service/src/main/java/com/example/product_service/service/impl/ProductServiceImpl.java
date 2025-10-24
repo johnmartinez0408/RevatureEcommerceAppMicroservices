@@ -6,6 +6,7 @@ import com.example.product_service.model.ProductRequest;
 import com.example.product_service.model.ProductResponse;
 import com.example.product_service.repository.ProductRepository;
 import com.example.product_service.service.ProductService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,6 +15,7 @@ import static org.springframework.beans.BeanUtils.copyProperties;
 import java.util.ArrayList;
 import java.util.List;
 
+@Slf4j //for logging
 @Service
 public class ProductServiceImpl implements ProductService {
 

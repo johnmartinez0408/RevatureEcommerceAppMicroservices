@@ -12,7 +12,7 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
 
     @ExceptionHandler(OrderServiceException.class)
     public ResponseEntity<ErrorDetail> handleOrderServiceException(OrderServiceException ex){
-        ErrorDetail errorDetail = new ErrorDetail(ex.getMessage(), ex.getStatusCode());
+        ErrorDetail errorDetail = new ErrorDetail(ex.getMessage(), ex.getErrorCode(), ex.getStatusCode());
         return new ResponseEntity<>(errorDetail, HttpStatus.NOT_FOUND);
     }
 }
