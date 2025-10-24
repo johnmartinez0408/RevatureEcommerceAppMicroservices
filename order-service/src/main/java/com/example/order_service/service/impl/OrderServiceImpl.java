@@ -4,6 +4,7 @@ import com.example.order_service.entity.Order;
 import com.example.order_service.exception.OrderServiceException;
 import com.example.order_service.external.client.ProductService;
 import com.example.order_service.model.OrderRequest;
+import com.example.order_service.model.PaymentMethod;
 import com.example.order_service.repository.OrderRepository;
 import com.example.order_service.service.OrderService;
 import com.netflix.discovery.converters.Auto;
@@ -54,7 +55,7 @@ public class OrderServiceImpl implements OrderService {
         order.setQuantity(orderRequest.getQuantity());
         order.setOrderDate(Instant.now());
         order.setOrderStatus("CREATED");
-//        order.setPaymentMethod(orderRequest.getPaymentMethod());
+        order.setPaymentMethod(PaymentMethod.valueOf(orderRequest.getPaymentMethod()));
 
         order = orderRepository.save(order);
 

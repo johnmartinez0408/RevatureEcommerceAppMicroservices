@@ -11,5 +11,5 @@ public class OrderRequest {
     private Long productId;
     private Long quantity;
     private Long amount;
-    private PaymentMethod paymentMethod;
+    private String paymentMethod;
 }
