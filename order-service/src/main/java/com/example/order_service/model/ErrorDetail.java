@@ -11,4 +11,9 @@ public class ErrorDetail {
     private String errorMessage;
     private String errorCode;
     private int httpStatusCode; //Http status code
+
+    public ErrorDetail(String errorMessage, String errorCode){
+        this.errorMessage = errorMessage;
+        this.errorCode = errorCode;
+    }
 }
