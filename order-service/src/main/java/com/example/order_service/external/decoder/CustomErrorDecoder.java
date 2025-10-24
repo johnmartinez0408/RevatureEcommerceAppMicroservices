@@ -22,7 +22,7 @@ public class CustomErrorDecoder implements ErrorDecoder {
             return new OrderServiceException(
                     errorDetail.getErrorMessage(),
                     errorDetail.getErrorCode(),
-                    errorDetail.getStatusCode());
+                    response.status());
         } catch (IOException e) {
             throw new OrderServiceException("Internal server error", "INTERNAL_SERVER_ERROR", 500);
         }
