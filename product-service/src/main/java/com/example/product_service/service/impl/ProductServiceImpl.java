@@ -1,6 +1,7 @@
 package com.example.product_service.service.impl;
 
 import com.example.product_service.entity.Product;
+import com.example.product_service.exception.ProductServiceException;
 import com.example.product_service.model.ProductRequest;
 import com.example.product_service.model.ProductResponse;
 import com.example.product_service.repository.ProductRepository;
@@ -38,9 +39,9 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public ProductResponse getProductById(Long productId) {
-//        Product product= productRepository.findById(productId)
-//                .orElseThrow(() -> new RuntimeException("Product not found"));
-        Product product = productRepository.findById(productId).get();
+        Product product= productRepository.findById(productId)
+                .orElseThrow(() -> new ProductServiceException("Product not found with id: " + productId, "PRODUCT_NOT_FOUND"));
+//        Product product = productRepository.findById(productId).get();
         ProductResponse productResponse = new ProductResponse();
         copyProperties(product, productResponse);
 
