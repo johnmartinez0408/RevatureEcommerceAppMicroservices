@@ -1,11 +1,7 @@
 package com.example.payment_service.service;
 
-import com.example.payment_service.entity.Payment;
-
-import java.util.List;
+import com.example.payment_service.entity.PaymentRequest;
 
 public interface PaymentService {
-    List<Payment> getAllPayments();
-    Payment getPaymentById(Long paymentId);
-    Payment savePayment(Payment payment);
+    Long doPayment(PaymentRequest paymentRequest);
 }
