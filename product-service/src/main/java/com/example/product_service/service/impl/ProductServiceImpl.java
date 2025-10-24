@@ -41,7 +41,6 @@ public class ProductServiceImpl implements ProductService {
     public ProductResponse getProductById(Long productId) {
         Product product= productRepository.findById(productId)
                 .orElseThrow(() -> new ProductServiceException("Product not found with id: " + productId, "PRODUCT_NOT_FOUND"));
-//        Product product = productRepository.findById(productId).get();
         ProductResponse productResponse = new ProductResponse();
         copyProperties(product, productResponse);
 
