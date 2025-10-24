@@ -4,6 +4,7 @@ import com.example.product_service.entity.Product;
 import com.example.product_service.model.ProductRequest;
 import com.example.product_service.model.ProductResponse;
 import com.example.product_service.service.ProductService;
+import jakarta.ws.rs.Path;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -33,5 +34,15 @@ public class ProductController {
     @PostMapping
     public ResponseEntity<ProductResponse> addProduct(@RequestBody ProductRequest productRequest){
         return new ResponseEntity<>(productService.addProduct(productRequest), HttpStatus.CREATED);
+    }
+
+
+    //path variable comes from ?quantity=123 part of url
+    @PutMapping("/reduce-quantity/{productId}")
+    public ResponseEntity<Void> reduceQuantity(@PathVariable Long productId,
+                                               @RequestParam("quantity") Long quantity){
+        productService.reduceQuantity(productId, quantity);
+
+        return ResponseEntity.noContent().build();
     }
 }
