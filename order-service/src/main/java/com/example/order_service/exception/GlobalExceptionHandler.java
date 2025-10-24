@@ -12,7 +12,7 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExcep
 @ControllerAdvice
 public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
 
-    @ExceptionHandler(OrderServiceException.class)
+    @ExceptionHandler(Exception.class)
     public ResponseEntity<ErrorDetail> handleOrderServiceException(OrderServiceException ex){
         ErrorDetail errorDetail = new ErrorDetail(ex.getMessage(), ex.getErrorCode());
         return new ResponseEntity<>(errorDetail, HttpStatusCode.valueOf(ex.getHttpStatusCode()));
