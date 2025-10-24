@@ -1,10 +1,13 @@
 package com.example.order_service.service.impl;
 
 import com.example.order_service.entity.Order;
+import com.example.order_service.exception.OrderServiceException;
 import com.example.order_service.model.OrderRequest;
 import com.example.order_service.repository.OrderRepository;
 import com.example.order_service.service.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.time.Instant;
@@ -23,7 +26,9 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     public Order getOrderById(Long id) {
-        return orderRepository.findById(id).get();
+        Order order = orderRepository.findById(id)
+                .orElseThrow(() -> new OrderServiceException("Order not found with id: "+ id, "ORDER_NOT_FOUND"));
+        return order;
     }
 
     @Override
