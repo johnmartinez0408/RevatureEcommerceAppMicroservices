@@ -1,8 +1,13 @@
 spring:
   application:
     name: AUTH-SERVICE
-  config:
-    import: "optional:configserver:http://localhost:9000"
+  security:
+    user:
+      name: admin
+      password: admin123
+      roles: ADMIN
+#  config:
+#    import: "optional:configserver:http://localhost:9000"
   datasource:
     url: jdbc:mysql://localhost:3306/authdb?createDatabaseIfNotExist=true
     username: root
@@ -12,3 +17,6 @@ spring:
     hibernate:
       ddl-auto: update
     show-sql: true
+
+server:
+  port: 8081
