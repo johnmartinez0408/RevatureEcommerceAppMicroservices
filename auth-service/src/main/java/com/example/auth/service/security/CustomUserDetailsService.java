@@ -1,8 +1,7 @@
-package com.example.auth_service.security;
+package com.example.auth.service.security;
 
-import com.example.auth_service.entity.Role;
-import com.example.auth_service.entity.User;
-import com.example.auth_service.repository.UserRepository;
+import com.example.auth.service.entity.User;
+import com.example.auth.service.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
