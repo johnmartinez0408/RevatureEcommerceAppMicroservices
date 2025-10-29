@@ -2,6 +2,7 @@ package com.example.product_service.service.impl;
 
 import com.example.product_service.entity.Product;
 import com.example.product_service.exception.ProductServiceException;
+import com.example.product_service.external.client.CategoryService;
 import com.example.product_service.model.ProductRequest;
 import com.example.product_service.model.ProductResponse;
 import com.example.product_service.repository.ProductRepository;
@@ -23,6 +24,9 @@ public class ProductServiceImpl implements ProductService {
     @Autowired
     private ProductRepository productRepository;
 
+    @Autowired
+    private CategoryService categoryService;
+
     @Override
     public List<ProductResponse> getAllProducts() {
 
@@ -33,6 +37,8 @@ public class ProductServiceImpl implements ProductService {
             product -> {
                 ProductResponse currentProductResponse = new ProductResponse();
                 copyProperties(product, currentProductResponse);
+                String categoryName = categoryService.getCategoryNameById(product.getCategoryId());
+                currentProductResponse.setCategoryName(categoryName);
                 productResponses.add(currentProductResponse);
             }
         );
@@ -44,6 +50,7 @@ public class ProductServiceImpl implements ProductService {
     public ProductResponse getProductById(Long productId) {
         Product product= productRepository.findById(productId)
                 .orElseThrow(() -> new ProductServiceException("Product not found with id: " + productId, "PRODUCT_NOT_FOUND"));
+        String categoryName = categoryService.getCategoryNameById(product.getCategoryId());
         ProductResponse productResponse = new ProductResponse();
         copyProperties(product, productResponse);
 
@@ -58,11 +65,13 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public List<ProductResponse> getProductsByCategory(Long categoryId) {
+        String categoryName = categoryService.getCategoryNameById(categoryId);
         List<Product> products = productRepository.findByCategoryId(categoryId);
         List<ProductResponse> productResponses = products.stream()
                 .map(product -> {
                     ProductResponse response = new ProductResponse();
                     copyProperties(product, response);
+                    response.setCategoryName(categoryName);
                     return response;
                 })
                 .collect(Collectors.toList());
