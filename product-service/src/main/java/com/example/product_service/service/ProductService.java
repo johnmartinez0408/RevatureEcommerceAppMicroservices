@@ -17,4 +17,5 @@ public interface ProductService {
 
     //Important
     void reduceQuantity(Long productId, Long quantity);
+
 }

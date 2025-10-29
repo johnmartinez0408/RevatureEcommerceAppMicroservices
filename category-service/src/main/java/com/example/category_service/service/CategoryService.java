@@ -7,4 +7,5 @@ public interface CategoryService {
     List<Category> getAllCategories();
     Category getCategoryById(Long categoryId);
     Category saveCategory(Category category);
+    String getNameById(Long categoryId);
 }

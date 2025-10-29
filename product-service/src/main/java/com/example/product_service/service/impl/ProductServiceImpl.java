@@ -14,6 +14,7 @@ import static org.springframework.beans.BeanUtils.copyProperties;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Slf4j //for logging
 @Service
@@ -57,7 +58,16 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public List<ProductResponse> getProductsByCategory(Long categoryId) {
-        return List.of();
+        List<Product> products = productRepository.findByCategoryId(categoryId);
+        List<ProductResponse> productResponses = products.stream()
+                .map(product -> {
+                    ProductResponse response = new ProductResponse();
+                    copyProperties(product, response);
+                    return response;
+                })
+                .collect(Collectors.toList());
+
+        return productResponses;
     }
 
     @Override
@@ -90,8 +100,4 @@ public class ProductServiceImpl implements ProductService {
 
         productRepository.save(product);
     }
-
-
-
-
 }

@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+@CrossOrigin(origins = "http://localhost:3000")
 @RequestMapping("/api/category")
 @RestController
 public class CategoryController {
@@ -28,6 +29,11 @@ public class CategoryController {
     @PostMapping
     public Category saveCategory(@RequestBody Category category){
         return categoryService.saveCategory(category);
+    }
+
+    @GetMapping("/name/{categoryId}")
+    public String getCategoryNameById(@PathVariable Long categoryId){
+        return categoryService.getNameById(categoryId);
     }
 
 }

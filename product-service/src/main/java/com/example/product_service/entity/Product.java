@@ -19,8 +19,12 @@ public class Product {
             strategy = GenerationType.IDENTITY
     )
     private Long productId;
+    private Long categoryId;
     private String productName;
+    @Column(length = 2000)
     private String productDescription;
     private String price;
     private Long quantity;
+    private String image;
+    private String brand;
 }

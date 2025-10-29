@@ -3,3 +3,12 @@ spring:
     name: CATEGORY-SERVICE
   config:
     import: "optional:configserver:http://localhost:9000"
+  datasource:
+    url: jdbc:mysql://localhost:3306/categorydb?createDatabaseIfNotExist=true
+    username: root
+    password:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true

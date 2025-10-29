@@ -17,7 +17,8 @@ import java.util.Date;
 @Component
 public class JwtTokenProvider {
     private String jwtSecret ="VGhpcyBpcyB0aGUgSldUIHNlY3JldCBrZXkgZm9yIGltcGxlbWVudGluZyBqd3QgdG9rZW4gc3lzdGVtIGluIGF1dGggc2VydmljZQ==";
-    private Long jwtExpirationInMs = 604800L; //10 mins
+//    private Long jwtExpirationInMs = 604800L; //10 mins
+    private Long jwtExpirationInMs = 86400000L; //1 day
 //    private Long jwtExpirationInMs = 604800000L; //7 days
 
     // Generate token
