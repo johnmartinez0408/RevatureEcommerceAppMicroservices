@@ -16,6 +16,11 @@ public class AuthController {
     @Autowired
     private AuthService authService;
 
+    @GetMapping("/")
+    public String index(){
+        return "GET: Hello world!";
+    }
+
     @PostMapping("/register")
     public ResponseEntity<String> register(@RequestBody RegisterDto registerDto){
         String message = authService.register(registerDto);
