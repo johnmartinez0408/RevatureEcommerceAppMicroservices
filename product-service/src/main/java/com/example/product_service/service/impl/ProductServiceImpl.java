@@ -53,7 +53,7 @@ public class ProductServiceImpl implements ProductService {
         String categoryName = categoryService.getCategoryNameById(product.getCategoryId());
         ProductResponse productResponse = new ProductResponse();
         copyProperties(product, productResponse);
-
+        productResponse.setCategoryName(categoryName);
         return productResponse;
     }
 
