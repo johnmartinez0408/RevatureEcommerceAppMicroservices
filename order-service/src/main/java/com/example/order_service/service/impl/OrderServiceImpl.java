@@ -14,7 +14,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.time.Instant;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class OrderServiceImpl implements OrderService {
@@ -65,5 +67,14 @@ public class OrderServiceImpl implements OrderService {
         //4 if payment failed, revert inventory changes, status to PAYMENT_FAILED
 
         return order.getOrderId();
+    }
+
+    @Override
+    public List<Long> placeOrders(List<OrderRequest> orders){
+
+        return orders.stream()
+                .map(this::placeOrder)
+                .collect(Collectors.toList());
+
     }
 }

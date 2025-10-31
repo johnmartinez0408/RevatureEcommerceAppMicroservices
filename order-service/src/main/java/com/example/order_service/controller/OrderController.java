@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+@CrossOrigin(origins = "http://localhost:3000")
 @RestController
 @RequestMapping("/api/order")
 public class OrderController {
@@ -36,5 +37,11 @@ public class OrderController {
     public ResponseEntity<Long> placeOrder(@RequestBody OrderRequest orderRequest){
         Long orderId = orderService.placeOrder(orderRequest);
         return new ResponseEntity<>(orderId, HttpStatus.CREATED);
+    }
+
+    @PostMapping("/place-multiple")
+    public ResponseEntity<List<Long>> placeOrders(@RequestBody List<OrderRequest> orderRequests){
+        List<Long> orderIds = orderService.placeOrders(orderRequests);
+        return new ResponseEntity<>(orderIds, HttpStatus.CREATED);
     }
 }

@@ -11,4 +11,5 @@ public interface OrderService {
     Order getOrderById(Long id);
     Order saveOrder(Order order);
     Long placeOrder(OrderRequest orderRequest);
+    List<Long> placeOrders(List<OrderRequest> orders);
 }
