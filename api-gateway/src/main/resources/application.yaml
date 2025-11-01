@@ -5,6 +5,16 @@ spring:
     import: "optional:configserver:http://localhost:9000"
   cloud:
     gateway:
+      globalcors:
+        add-to-simple-url-handler-mapping: true
+        corsConfigurations:
+          '[/**]':
+            allowedOrigins: "http://localhost:3000"
+            allowedMethods: "*"
+            allowedHeaders: "*"
+            allowCredentials: true
+      default-filters:
+        - DedupeResponseHeader=Access-Control-Allow-Origin Access-Control-Allow-Credentials,Vary
       routes:
         - id: AUTH-SERVICE
           uri: lb://AUTH-SERVICE
