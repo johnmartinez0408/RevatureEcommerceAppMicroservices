@@ -17,6 +17,9 @@ spring:
     hibernate:
       ddl-auto: update
     show-sql: true
-
 #server:
 #  port: 8081
+
+custom:
+  security:
+    secret: VGhpcyBpcyB0aGUgSldUIHNlY3JldCBrZXkgZm9yIGltcGxlbWVudGluZyBqd3QgdG9rZW4gc3lzdGVtIGluIGF1dGggc2VydmljZQ==

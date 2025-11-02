@@ -7,6 +7,7 @@ import io.jsonwebtoken.UnsupportedJwtException;
 import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
 import io.jsonwebtoken.security.SecurityException;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Component;
 
@@ -16,7 +17,8 @@ import java.util.Date;
 
 @Component
 public class JwtTokenProvider {
-    private String jwtSecret ="VGhpcyBpcyB0aGUgSldUIHNlY3JldCBrZXkgZm9yIGltcGxlbWVudGluZyBqd3QgdG9rZW4gc3lzdGVtIGluIGF1dGggc2VydmljZQ==";
+    @Value("${custom.security.secret}")
+    private String jwtSecret;
 //    private Long jwtExpirationInMs = 604800L; //10 mins
     private Long jwtExpirationInMs = 86400000L; //1 day
 //    private Long jwtExpirationInMs = 604800000L; //7 days
